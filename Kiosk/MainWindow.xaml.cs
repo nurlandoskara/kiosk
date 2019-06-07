@@ -1,4 +1,6 @@
-﻿namespace Kiosk
+﻿using Kiosk.ViewModels;
+
+namespace Kiosk
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -8,6 +10,7 @@
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }
