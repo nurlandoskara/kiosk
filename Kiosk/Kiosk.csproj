@@ -120,6 +120,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Command.cs" />
+    <Compile Include="Classes\LoadData.cs" />
+    <Compile Include="Models\ImageItem.cs" />
     <Compile Include="RightMenuContent.xaml.cs">
       <DependentUpon>RightMenuContent.xaml</DependentUpon>
     </Compile>
@@ -128,6 +130,9 @@
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\Gallery.xaml.cs">
+      <DependentUpon>Gallery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WebContent.xaml.cs">
       <DependentUpon>WebContent.xaml</DependentUpon>
     </Compile>
@@ -148,6 +153,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="LeftMenuContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Gallery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

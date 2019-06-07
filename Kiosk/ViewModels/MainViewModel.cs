@@ -2,6 +2,9 @@
 using System.Windows.Controls;
 using Kiosk.Classes;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using Caliburn.Micro;
+using Kiosk.Models;
 using Kiosk.Views;
 
 namespace Kiosk.ViewModels
@@ -62,6 +65,8 @@ namespace Kiosk.ViewModels
             }
         }
         
+        public IObservableCollection<ImageItem> ImagesList { get; set; }
+
         public MainViewModel()
         {
             MuseumCommand = new Command(OpenMuseum, CanExecuteCommand);
@@ -109,6 +114,13 @@ namespace Kiosk.ViewModels
         private void OpenGalleryPhoto(object parameter)
         {
             Transition(false);
+            var list = LoadData.GetFiles("C:\\xampp\\htdocs\\PhotoGallery");
+            ImagesList = new BindableCollection<ImageItem>();
+            foreach (var image in list)
+            {
+                ImagesList.Add(new ImageItem{Source = new BitmapImage(new Uri(image))});
+            }
+            CenterTransitionContent = new Gallery();
         }
 
         private void OpenHistory(object parameter)
