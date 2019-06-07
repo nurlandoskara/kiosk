@@ -6,7 +6,7 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  mc:Ignorable="d" 
                  Title="KIOSK" Height="450" Width="800" WindowState="Maximized" WindowStyle="None" 
-                 ShowTitleBar="False"
+                 ShowTitleBar="False" ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False"
                  ContentRendered="MainWindow_OnContentRendered">
     <mah:MetroWindow.Background>
         <ImageBrush ImageSource="Resources/bg.jpg"/>
