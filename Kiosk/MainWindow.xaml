@@ -32,7 +32,8 @@
 
         <mah:TransitioningContentControl x:Name="CenterTransition" Visibility="{Binding IsCenterContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                          Content="{Binding CenterTransitionContent}" MouseDoubleClick="CenterTransition_OnMouseDoubleClick"
-                                         Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Transition="Up" />
+                                         Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Transition="Up" 
+                                         MouseLeave="CenterTransition_OnMouseLeave"/>
     </Grid>
 
 </mah:MetroWindow>

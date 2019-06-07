@@ -74,12 +74,13 @@ namespace Kiosk.ViewModels
             CommentCommand = new Command(OpenComment, CanExecuteCommand);
             Transition(true);
         }
-        private void Transition(bool isAppear)
+        public void Transition(bool isAppear)
         {
             if (isAppear)
             {
                 LeftTransitionContent = new LeftMenuContent();
                 RightTransitionContent = new RightMenuContent();
+                CenterTransitionContent = null;
                 IsCenterContentVisible = false;
             }
             else

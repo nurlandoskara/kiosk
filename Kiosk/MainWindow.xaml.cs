@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Kiosk.ViewModels;
@@ -15,6 +16,7 @@ namespace Kiosk
         private int _row;
         private int _columnSpan;
         private int _rowSpan;
+        private MainViewModel _viewModel;
         public MainWindow()
         {
             InitializeComponent();
@@ -22,7 +24,7 @@ namespace Kiosk
 
         private void MainWindow_OnContentRendered(object sender, EventArgs e)
         {
-            DataContext = new MainViewModel();
+            DataContext = _viewModel = new MainViewModel();
         }
 
         private void CenterTransition_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -46,6 +48,11 @@ namespace Kiosk
                 CenterTransition.SetValue(Grid.RowSpanProperty, Grid.RowDefinitions.Count);
             }
             _isMaximized = !_isMaximized;
+        }
+
+        private void CenterTransition_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            _viewModel.Transition(true);
         }
     }
 }
