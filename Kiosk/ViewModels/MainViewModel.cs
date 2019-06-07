@@ -130,6 +130,8 @@ namespace Kiosk.ViewModels
         private void OpenMuseum(object parameter)
         {
             Transition(false);
+            var web = new WebContent("http://localhost/");
+            CenterTransitionContent = web;
         }
     }
 }

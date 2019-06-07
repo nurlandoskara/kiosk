@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Kiosk.ViewModels;
 
 namespace Kiosk
@@ -8,6 +10,11 @@ namespace Kiosk
     /// </summary>
     public partial class MainWindow
     {
+        private bool _isMaximized;
+        private int _column;
+        private int _row;
+        private int _columnSpan;
+        private int _rowSpan;
         public MainWindow()
         {
             InitializeComponent();
@@ -16,6 +23,29 @@ namespace Kiosk
         private void MainWindow_OnContentRendered(object sender, EventArgs e)
         {
             DataContext = new MainViewModel();
+        }
+
+        private void CenterTransition_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (_isMaximized)
+            {
+                CenterTransition.SetValue(Grid.RowProperty, _column);
+                CenterTransition.SetValue(Grid.ColumnProperty, _row);
+                CenterTransition.SetValue(Grid.ColumnSpanProperty, _columnSpan);
+                CenterTransition.SetValue(Grid.RowSpanProperty, _rowSpan);
+            }
+            else
+            {
+                _column = (int) CenterTransition.GetValue(Grid.ColumnProperty);
+                _row = (int)CenterTransition.GetValue(Grid.RowProperty);
+                _rowSpan = (int)CenterTransition.GetValue(Grid.RowSpanProperty);
+                _columnSpan = (int)CenterTransition.GetValue(Grid.ColumnSpanProperty);
+                CenterTransition.SetValue(Grid.RowProperty, 0);
+                CenterTransition.SetValue(Grid.ColumnProperty, 0);
+                CenterTransition.SetValue(Grid.ColumnSpanProperty, Grid.ColumnDefinitions.Count);
+                CenterTransition.SetValue(Grid.RowSpanProperty, Grid.RowDefinitions.Count);
+            }
+            _isMaximized = !_isMaximized;
         }
     }
 }
