@@ -1,4 +1,5 @@
-﻿using Kiosk.ViewModels;
+﻿using System;
+using Kiosk.ViewModels;
 
 namespace Kiosk
 {
@@ -10,6 +11,10 @@ namespace Kiosk
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MainWindow_OnContentRendered(object sender, EventArgs e)
+        {
             DataContext = new MainViewModel();
         }
     }

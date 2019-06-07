@@ -1,6 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using Kiosk.Classes;
 using System.Windows.Input;
+using Kiosk.Views;
 
 namespace Kiosk.ViewModels
 {
@@ -8,6 +10,8 @@ namespace Kiosk.ViewModels
     {
         private UserControl _leftTransitionContent;
         private UserControl _rightTransitionContent;
+        private bool _isCenterContentVisible;
+        private UserControl _centerTransitionContent;
 
         public UserControl LeftTransitionContent
         {
@@ -29,6 +33,16 @@ namespace Kiosk.ViewModels
             }
         }
 
+        public UserControl CenterTransitionContent
+        {
+            get => _centerTransitionContent;
+            set
+            {
+                _centerTransitionContent = value;
+                NotifyOfPropertyChange(() => CenterTransitionContent);
+            }
+        }
+
         public ICommand MuseumCommand { get; set; }
         public ICommand VirtualCommand { get; set; }
         public ICommand Gallery3DCommand { get; set; }
@@ -37,6 +51,17 @@ namespace Kiosk.ViewModels
         public ICommand BukletCommand { get; set; }
         public ICommand Model3DCommand { get; set; }
         public ICommand CommentCommand { get; set; }
+
+        public bool IsCenterContentVisible
+        {
+            get => _isCenterContentVisible;
+            set
+            {
+                _isCenterContentVisible = value;
+                NotifyOfPropertyChange(() => IsCenterContentVisible);
+            }
+        }
+        
         public MainViewModel()
         {
             MuseumCommand = new Command(OpenMuseum, CanExecuteCommand);
@@ -47,10 +72,24 @@ namespace Kiosk.ViewModels
             BukletCommand = new Command(OpenBuklet, CanExecuteCommand);
             Model3DCommand = new Command(OpenModel3D, CanExecuteCommand);
             CommentCommand = new Command(OpenComment, CanExecuteCommand);
-            LeftTransitionContent = new LeftMenuContent();
-            RightTransitionContent = new RightMenuContent();
+            Transition(true);
         }
-
+        private void Transition(bool isAppear)
+        {
+            if (isAppear)
+            {
+                LeftTransitionContent = new LeftMenuContent();
+                RightTransitionContent = new RightMenuContent();
+                IsCenterContentVisible = false;
+            }
+            else
+            {
+                LeftTransitionContent = null;
+                RightTransitionContent = null;
+                IsCenterContentVisible = true;
+            }
+        }
+        
         private void OpenComment(object parameter)
         {
             Transition(false);
@@ -84,25 +123,13 @@ namespace Kiosk.ViewModels
         private void OpenVirtual(object parameter)
         {
             Transition(false);
+            var web = new WebContent("http://localhost/VirtualTour/");
+            CenterTransitionContent = web;
         }
 
         private void OpenMuseum(object parameter)
         {
             Transition(false);
-        }
-        
-        private void Transition(bool isAppear)
-        {
-            if (isAppear)
-            {
-                LeftTransitionContent = new LeftMenuContent();
-                RightTransitionContent = new RightMenuContent();
-            }
-            else
-            {
-                LeftTransitionContent = null;
-                RightTransitionContent = null;
-            }
         }
     }
 }
