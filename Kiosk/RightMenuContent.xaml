@@ -7,23 +7,29 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        <Button Content="Музей сайты" Margin="10" Grid.Row="1" Command="{Binding MuseumCommand}" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Музей сайты" Margin="5" Grid.Row="1" Command="{Binding GalleryPhotoCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/buttonR.png"/>
             </Button.Background>
         </Button>
-        <Button Content="Музей сайты" Margin="10" Grid.Row="2" Command="{Binding MuseumCommand}">
+        <Button Content="Музей сайты" Margin="5" Grid.Row="2" Command="{Binding BukletCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/buttonR.png"/>
             </Button.Background>
         </Button>
-        <Button Content="Музей сайты" Margin="10" Grid.Row="3" Command="{Binding MuseumCommand}">
+        <Button Content="Музей сайты" Margin="5" Grid.Row="3" Command="{Binding Model3DCommand}">
+            <Button.Background>
+                <ImageBrush ImageSource="Resources/buttonR.png"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Музей сайты" Margin="5" Grid.Row="4" Command="{Binding CommentCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/buttonR.png"/>
             </Button.Background>
