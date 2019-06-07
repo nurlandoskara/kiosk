@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Kiosk.Views
 {
@@ -11,7 +11,12 @@ namespace Kiosk.Views
         public WebContent(string url)
         {
             InitializeComponent();
-            WebBrowser.Navigate(new Uri(url));
+            WebBrowser.Address = url;
+        }
+
+        private void WebBrowser_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }
