@@ -4,6 +4,7 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                  mc:Ignorable="d" 
                  Title="KIOSK" Height="450" Width="800" WindowState="Maximized" WindowStyle="None" 
                  ShowTitleBar="False" ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False"
@@ -30,14 +31,17 @@
                                          Content="{Binding RightTransitionContent}" 
                                          Grid.Column="2" Grid.Row="1" Transition="Left" />
 
-        <mah:TransitioningContentControl x:Name="CenterTransition" Visibility="{Binding IsCenterContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                         Content="{Binding CenterTransitionContent}" MouseDoubleClick="CenterTransition_OnMouseDoubleClick"
-                                         Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Transition="Up" 
-                                         MouseLeave="CenterTransition_OnMouseLeave">
-            <mah:TransitioningContentControl.Effect>
-                <DropShadowEffect/>
-            </mah:TransitioningContentControl.Effect>
-        </mah:TransitioningContentControl>
+        <materialDesign:Transitioner SelectedIndex="{Binding SelectedCenterContentIndex}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" 
+                                     MouseDoubleClick="CenterTransition_OnMouseDoubleClick"
+                                     Visibility="{Binding IsCenterContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect ExpandIn}">
+                <Label Content="TEST" Visibility="Hidden"></Label>
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom}">
+                <mah:TransitioningContentControl x:Name="CenterTransition" Content="{Binding CenterTransitionContent}" 
+                                     Transition="Down" MouseLeave="CenterTransition_OnMouseLeave"/>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
     </Grid>
 
 </mah:MetroWindow>

@@ -15,6 +15,7 @@ namespace Kiosk.ViewModels
         private UserControl _rightTransitionContent;
         private bool _isCenterContentVisible;
         private UserControl _centerTransitionContent;
+        private int _selectedCenterContentIndex;
 
         public UserControl LeftTransitionContent
         {
@@ -67,6 +68,16 @@ namespace Kiosk.ViewModels
         
         public IObservableCollection<ImageItem> ImagesList { get; set; }
 
+        public int SelectedCenterContentIndex
+        {
+            get => _selectedCenterContentIndex;
+            set
+            {
+                _selectedCenterContentIndex = value;
+                NotifyOfPropertyChange(() => SelectedCenterContentIndex);
+            }
+        }
+
         public MainViewModel()
         {
             MuseumCommand = new Command(OpenMuseum, CanExecuteCommand);
@@ -83,6 +94,7 @@ namespace Kiosk.ViewModels
         {
             if (isAppear)
             {
+                SelectedCenterContentIndex = 0;
                 LeftTransitionContent = new LeftMenuContent();
                 RightTransitionContent = new RightMenuContent();
                 CenterTransitionContent = null;
@@ -93,27 +105,24 @@ namespace Kiosk.ViewModels
                 LeftTransitionContent = null;
                 RightTransitionContent = null;
                 IsCenterContentVisible = true;
+                SelectedCenterContentIndex = 1;
             }
         }
         
         private void OpenComment(object parameter)
         {
-            Transition(false);
         }
 
         private void OpenModel3D(object parameter)
         {
-            Transition(false);
         }
 
         private void OpenBuklet(object parameter)
         {
-            Transition(false);
         }
 
         private void OpenGalleryPhoto(object parameter)
         {
-            Transition(false);
             var list = LoadData.GetFiles("C:\\xampp\\htdocs\\PhotoGallery");
             ImagesList = new BindableCollection<ImageItem>();
             foreach (var image in list)
@@ -121,30 +130,29 @@ namespace Kiosk.ViewModels
                 ImagesList.Add(new ImageItem{Source = new BitmapImage(new Uri(image))});
             }
             CenterTransitionContent = new Gallery();
+            Transition(false);
         }
 
         private void OpenHistory(object parameter)
         {
-            Transition(false);
         }
 
         private void OpenGallery3D(object parameter)
         {
-            Transition(false);
         }
 
         private void OpenVirtual(object parameter)
         {
-            Transition(false);
             var web = new WebContent("http://localhost/VirtualTour/");
             CenterTransitionContent = web;
+            Transition(false);
         }
 
         private void OpenMuseum(object parameter)
         {
-            Transition(false);
             var web = new WebContent("http://localhost/");
             CenterTransitionContent = web;
+            Transition(false);
         }
     }
 }
