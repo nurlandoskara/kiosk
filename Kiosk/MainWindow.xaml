@@ -31,16 +31,14 @@
                                          Content="{Binding RightTransitionContent}" 
                                          Grid.Column="2" Grid.Row="1" Transition="Left" />
 
-        <materialDesign:Transitioner SelectedIndex="{Binding SelectedCenterContentIndex}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" 
+        <materialDesign:Transitioner x:Name="CenterTransition" SelectedIndex="{Binding SelectedCenterContentIndex}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" 
                                      MouseDoubleClick="CenterTransition_OnMouseDoubleClick"
                                      Visibility="{Binding IsCenterContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect ExpandIn}">
-                <Label Content="TEST" Visibility="Hidden"></Label>
-            </materialDesign:TransitionerSlide>
-            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom}">
-                <mah:TransitioningContentControl x:Name="CenterTransition" Content="{Binding CenterTransitionContent}" 
-                                     Transition="Down" MouseLeave="CenterTransition_OnMouseLeave"/>
-            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitioningContent Content="{Binding CenterTransitionContent}" MouseLeave="CenterTransition_OnMouseLeave">
+                <materialDesign:TransitioningContent.OpeningEffects>
+                    <materialDesign:TransitionEffect Kind="SlideInFromBottom" />
+                </materialDesign:TransitioningContent.OpeningEffects>
+            </materialDesign:TransitioningContent>
         </materialDesign:Transitioner>
     </Grid>
 
