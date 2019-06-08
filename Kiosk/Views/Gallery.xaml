@@ -11,7 +11,15 @@
     </UserControl.Background>
     <Grid>
         <ListBox x:Name="GalleryList" HorizontalContentAlignment="Center" Padding="50" ItemsSource="{Binding ImagesList}" Background="{x:Null}" >
-            <ListBox.ItemsPanel>
+            <ListBox.Resources>
+        <!-- Background of selected item when focussed -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                         Color="Red" />
+        <!-- Background of selected item when not focussed -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                         Color="Blue" />
+    </ListBox.Resources>
+          <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel x:Name="WrapPanel" HorizontalAlignment="Center" Orientation="Horizontal" MaxWidth="{Binding ActualWidth, ElementName=GalleryList}"/>
                 </ItemsPanelTemplate>
