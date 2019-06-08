@@ -52,7 +52,6 @@ namespace Kiosk
 
         private void CenterTransition_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            _isMaximized = !_isMaximized;
             _viewModel.Transition(true);
         }
     }
