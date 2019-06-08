@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Class="Kiosk.Views.Gallery"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid>
         <ListBox x:Name="GalleryList" HorizontalContentAlignment="Center"
                  ItemsSource="{Binding ImagesList}" Background="{x:Null}" BorderBrush="{x:Null}" >
@@ -22,7 +22,7 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Image Height="200" Width="200" Margin="10" Source="{Binding Source}" Stretch="Uniform"/>
+                    <Image Width="200" Margin="10" Source="{Binding Source}" Stretch="Uniform"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
