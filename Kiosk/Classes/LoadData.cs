@@ -15,7 +15,7 @@ namespace Kiosk.Classes
         public static List<string> GetFolders(string folder)
         {
             var di = new DirectoryInfo(folder);
-            return di.GetDirectories().Select(dir => dir.FullName).ToList();
+            return di.GetDirectories().Select(dir => dir.Name).ToList();
         }
     }
 }

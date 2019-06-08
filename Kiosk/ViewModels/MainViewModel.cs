@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using Kiosk.Classes;
 using System.Windows.Input;
@@ -6,6 +7,7 @@ using System.Windows.Media.Imaging;
 using Caliburn.Micro;
 using Kiosk.Models;
 using Kiosk.Views;
+using MahApps.Metro.Controls;
 
 namespace Kiosk.ViewModels
 {
@@ -16,6 +18,7 @@ namespace Kiosk.ViewModels
         private bool _isCenterContentVisible;
         private UserControl _centerTransitionContent;
         private int _selectedCenterContentIndex;
+        private ImageItem _selectedImage;
 
         public UserControl LeftTransitionContent
         {
@@ -66,7 +69,7 @@ namespace Kiosk.ViewModels
             }
         }
         
-        public IObservableCollection<ImageItem> ImagesList { get; set; }
+        public ObservableCollection<ImageItem> ImagesList { get; set; }
 
         public int SelectedCenterContentIndex
         {
@@ -75,6 +78,19 @@ namespace Kiosk.ViewModels
             {
                 _selectedCenterContentIndex = value;
                 NotifyOfPropertyChange(() => SelectedCenterContentIndex);
+                OpenViewer();
+            }
+        }
+
+        public ImageItem SelectedImage
+        {
+            get => _selectedImage;
+            set
+            {
+                if(value == _selectedImage) return;
+                _selectedImage = value;
+                NotifyOfPropertyChange(() => SelectedImage);
+                OpenViewer();
             }
         }
 
@@ -89,6 +105,23 @@ namespace Kiosk.ViewModels
             Model3DCommand = new Command(OpenModel3D, CanExecuteCommand);
             CommentCommand = new Command(OpenComment, CanExecuteCommand);
             Transition(true);
+        }
+
+        private void OpenViewer()
+        {
+            if (SelectedImage != null)
+            {
+                if (SelectedImage.ItemType == ItemType.Image)
+                {
+                    var viewer = new ImageViewer(ImagesList, SelectedImage);
+                    viewer.ShowDialog();
+                }
+                else
+                {
+                    var viewer = new WebViewer(ImagesList, SelectedImage);
+                    viewer.ShowDialog();
+                }
+            }
         }
         public void Transition(bool isAppear)
         {
@@ -114,14 +147,15 @@ namespace Kiosk.ViewModels
         private void OpenModel3D(object parameter)
         {
             Transition(false);
-            var list = LoadData.GetFolders("C:\\xampp\\htdocs\\Exponates");
+            var list = LoadData.GetFolders("C:\\xampp\\htdocs\\Exponates\\");
             ImagesList = new BindableCollection<ImageItem>();
             foreach (var folder in list)
             {
                 try
                 {
-                    var image = new BitmapImage(new Uri($"{folder}\\preview.jpg"));
-                    ImagesList.Add(new ImageItem { Source = image });
+                    var image = new BitmapImage(new Uri($"C:\\xampp\\htdocs\\Exponates\\{folder}\\preview.jpg"));
+                    ImagesList.Add(new ImageItem
+                        {Source = image, Url = $"http:\\\\localhost\\Exponates\\{folder}\\start.html", ItemType = ItemType.Html});
                 }
                 catch (Exception e)
                 {
@@ -144,7 +178,8 @@ namespace Kiosk.ViewModels
             {
                 try
                 {
-                    ImagesList.Add(new ImageItem { Source = new BitmapImage(new Uri(image)) });
+                    ImagesList.Add(new ImageItem
+                        {Source = new BitmapImage(new Uri(image)), ItemType = ItemType.Image, Url = image});
                 }
                 catch (Exception e)
                 {
@@ -167,7 +202,8 @@ namespace Kiosk.ViewModels
             {
                 try
                 {
-                    ImagesList.Add(new ImageItem { Source = new BitmapImage(new Uri(image)) });
+                    ImagesList.Add(new ImageItem
+                        {Source = new BitmapImage(new Uri(image)), ItemType = ItemType.Image, Url = image});
                 }
                 catch (Exception e)
                 {

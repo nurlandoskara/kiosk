@@ -20,6 +20,9 @@ namespace Kiosk
         public MainWindow()
         {
             InitializeComponent();
+#if !DEBUG
+            this.Topmost = true;
+#endif
         }
 
         private void MainWindow_OnContentRendered(object sender, EventArgs e)

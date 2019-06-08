@@ -1,0 +1,34 @@
+﻿<mah:MetroWindow x:Class="Kiosk.Views.ImageViewer"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 ShowMaxRestoreButton="False" ShowMinButton="False" ShowCloseButton="False"
+                 mc:Ignorable="d" ShowIconOnTitleBar="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
+        WindowStyle="ToolWindow" WindowState="Maximized"
+        Title="" Height="450" Width="800">
+    <mah:MetroWindow.Background>
+        <SolidColorBrush Color="Transparent"/>
+    </mah:MetroWindow.Background>
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="20*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <mah:FlipView Grid.Row="1" Grid.Column="1" x:Name="FlipView" ItemsSource="{Binding Items}" MouseLeave="FlipView_OnMouseLeave"
+                      IsBannerEnabled="True" SelectedItem="{Binding SelectedItem}">
+            <mah:FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Image Width="{Binding ActualWidth, ElementName=FlipView}" Source="{Binding Url}"/>
+                </DataTemplate>
+            </mah:FlipView.ItemTemplate>
+        </mah:FlipView>
+    </Grid>
+</mah:MetroWindow>
