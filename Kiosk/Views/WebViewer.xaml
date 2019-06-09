@@ -12,7 +12,7 @@
     <mah:MetroWindow.Background>
         <SolidColorBrush Color="Transparent"/>
     </mah:MetroWindow.Background>
-    <Grid Background="Transparent">
+    <Grid Background="Transparent" x:Name="Grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="80*"/>
@@ -24,7 +24,8 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <mah:FlipView Grid.Row="1" Grid.Column="1" x:Name="FlipView" ItemsSource="{Binding Items}" MouseLeave="FlipView_OnMouseLeave"
-                      IsBannerEnabled="False" SelectedItem="{Binding SelectedItem}">
+                      IsBannerEnabled="False" SelectedItem="{Binding SelectedItem}" MouseDoubleClick="FlipView_OnMouseDoubleClick"
+                      SelectedIndex="{Binding SelectedIndex}">
             <mah:FlipView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="{Binding ActualWidth, ElementName=FlipView}">
