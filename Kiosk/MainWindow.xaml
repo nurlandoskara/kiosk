@@ -5,7 +5,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                 mc:Ignorable="d" 
+                 mc:Ignorable="d" MouseMove="MainWindow_OnMouseMove"
                  Title="KIOSK" Height="450" Width="800" WindowState="Maximized" WindowStyle="None" 
                  ShowTitleBar="False" ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False"
                  ContentRendered="MainWindow_OnContentRendered">
@@ -43,6 +43,7 @@
                 </materialDesign:TransitioningContent.OpeningEffects>
             </materialDesign:TransitioningContent>
         </materialDesign:Transitioner>
+        <MediaElement GotTouchCapture="ScreenSaver_OnGotTouchCapture" Visibility="Collapsed" x:Name="ScreenSaver" Source="C:\xampp\htdocs\screensaver.mp4" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" UnloadedBehavior="Manual" LoadedBehavior="Manual" OpacityMask="Black" Stretch="UniformToFill"/>
     </Grid>
 
 </mah:MetroWindow>

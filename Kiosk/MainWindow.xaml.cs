@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Kiosk.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Kiosk.ViewModels;
+using System.Windows.Threading;
 
 namespace Kiosk
 {
@@ -17,12 +18,27 @@ namespace Kiosk
         private int _columnSpan;
         private int _rowSpan;
         private MainViewModel _viewModel;
+        private readonly DispatcherTimer _timer;
+        private bool _screenSaver;
+
         public MainWindow()
         {
             InitializeComponent();
 #if !DEBUG
             this.Topmost = true;
 #endif
+            _timer = new DispatcherTimer();
+            _timer.Tick += Timer_Tick;
+            _timer.Interval = new TimeSpan(0, 1, 0);
+            _timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            _timer.Stop();
+            ScreenSaver.Visibility = Visibility.Visible;
+            ScreenSaver.Play();
+            _screenSaver = true;
         }
 
         private void MainWindow_OnContentRendered(object sender, EventArgs e)
@@ -56,6 +72,26 @@ namespace Kiosk
         private void CenterTransition_OnMouseLeave(object sender, MouseEventArgs e)
         {
             _viewModel.Transition(true);
+        }
+
+        private void MainWindow_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_screenSaver)
+            {
+                _timer.Stop();
+                _timer.Start();
+            }
+        }
+
+        private void ScreenSaver_OnGotTouchCapture(object sender, TouchEventArgs e)
+        {
+            if (_screenSaver)
+            {
+                ScreenSaver.Visibility = Visibility.Collapsed;
+                ScreenSaver.Stop();
+                _screenSaver = false;
+                _timer.Start();
+            }
         }
     }
 }
