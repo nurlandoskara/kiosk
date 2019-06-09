@@ -93,6 +93,12 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -106,7 +112,10 @@
       <HintPath>..\packages\ShowMeTheXAML.1.0.12\lib\net45\ShowMeTheXAML.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -131,8 +140,11 @@
     <Compile Include="Classes\Command.cs" />
     <Compile Include="Classes\Enums.cs" />
     <Compile Include="Classes\LoadData.cs" />
+    <Compile Include="ModelContainer.cs" />
+    <Compile Include="Models\BaseDbObject.cs" />
     <Compile Include="Models\FileItem.cs" />
     <Compile Include="Models\ImageItem.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="RightMenuContent.xaml.cs">
       <DependentUpon>RightMenuContent.xaml</DependentUpon>
     </Compile>
@@ -141,9 +153,13 @@
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PostViewModel.cs" />
     <Compile Include="ViewModels\ViewerViewModel.cs" />
     <Compile Include="Views\Gallery.xaml.cs">
       <DependentUpon>Gallery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PostView.xaml.cs">
+      <DependentUpon>PostView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WebViewer.xaml.cs">
       <DependentUpon>WebViewer.xaml</DependentUpon>
@@ -175,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Gallery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PostView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

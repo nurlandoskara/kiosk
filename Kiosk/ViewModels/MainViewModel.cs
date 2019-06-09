@@ -115,12 +115,12 @@ namespace Kiosk.ViewModels
                 if (SelectedImage.ItemType == ItemType.Image)
                 {
                     var viewer = new ImageViewer(ImagesList, SelectedImage);
-                    viewer.ShowDialog();
+                    CenterTransitionContent.Content = viewer;
                 }
                 else
                 {
                     var viewer = new WebViewer(ImagesList, SelectedImage);
-                    viewer.ShowDialog();
+                    CenterTransitionContent.Content = viewer;
                 }
             }
         }
@@ -143,6 +143,9 @@ namespace Kiosk.ViewModels
         
         private void OpenComment(object parameter)
         {
+            Transition(false);
+            var view = new PostView();
+            CenterTransitionContent = view;
         }
 
         private void OpenModel3D(object parameter)

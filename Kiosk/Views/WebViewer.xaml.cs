@@ -1,8 +1,6 @@
 ﻿using Kiosk.Models;
 using Kiosk.ViewModels;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Kiosk.Views
 {
@@ -11,47 +9,10 @@ namespace Kiosk.Views
     /// </summary>
     public partial class WebViewer
     {
-        private bool _isMaximized;
-        private object _column;
-        private object _row;
-        private object _rowSpan;
-        private object _columnSpan;
-
         public WebViewer(ObservableCollection<ImageItem> items, ImageItem selectedItem)
         {
             InitializeComponent();
-#if !DEBUG
-            this.Topmost = true;
-#endif
             DataContext = new ViewerViewModel(items, selectedItem);
-        }
-
-        private void FlipView_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            Close();
-        }
-
-        private void FlipView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (_isMaximized)
-            {
-                FlipView.SetValue(Grid.RowProperty, _column);
-                FlipView.SetValue(Grid.ColumnProperty, _row);
-                FlipView.SetValue(Grid.ColumnSpanProperty, _columnSpan);
-                FlipView.SetValue(Grid.RowSpanProperty, _rowSpan);
-            }
-            else
-            {
-                _column = (int)FlipView.GetValue(Grid.ColumnProperty);
-                _row = (int)FlipView.GetValue(Grid.RowProperty);
-                _rowSpan = (int)FlipView.GetValue(Grid.RowSpanProperty);
-                _columnSpan = (int)FlipView.GetValue(Grid.ColumnSpanProperty);
-                FlipView.SetValue(Grid.RowProperty, 0);
-                FlipView.SetValue(Grid.ColumnProperty, 0);
-                FlipView.SetValue(Grid.ColumnSpanProperty, Grid.ColumnDefinitions.Count);
-                FlipView.SetValue(Grid.RowSpanProperty, Grid.RowDefinitions.Count);
-            }
-            _isMaximized = !_isMaximized;
         }
     }
 }

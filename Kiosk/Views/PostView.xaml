@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Kiosk.Views.PostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Background>
+        <SolidColorBrush Color="White" Opacity="0.7"/>
+    </UserControl.Background>
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" mah:TextBoxHelper.Watermark="Отзыв" mah:TextBoxHelper.ClearTextButton="True"/>
+            <Button Grid.Row="1" Margin="10" Grid.Column="1" Content="OK" Style="{StaticResource AccentedSquareButtonStyle}"/>
+        </Grid>
+        <ListBox ItemsSource="{Binding Posts}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <mah:Badged Badge="{Binding DateString}">
+                        <Label HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                            <Label.Background>
+                                <SolidColorBrush Color="Green" Opacity="0.5"/>
+                            </Label.Background>
+                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Foreground="Black"/>
+                        </Label>
+                    </mah:Badged>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</UserControl>
