@@ -23,7 +23,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <mah:FlipView Grid.Row="1" Grid.Column="1" x:Name="FlipView" ItemsSource="{Binding Items}" MouseLeave="FlipView_OnMouseLeave"
-                      IsBannerEnabled="True" SelectedItem="{Binding SelectedItem}">
+                      IsBannerEnabled="True" SelectedItem="{Binding SelectedItem}" BannerText="{Binding SelectedItem.Url}">
             <mah:FlipView.ItemTemplate>
                 <DataTemplate>
                     <Image Width="{Binding ActualWidth, ElementName=FlipView}" Source="{Binding Url}"/>

@@ -14,25 +14,61 @@
             <RowDefinition Height="23*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        <Button Content="Музей сайты" Margin="5" Grid.Row="1" Command="{Binding GalleryPhotoCommand}">
+        <Button Margin="5" Grid.Row="1" x:Name="Button" Command="{Binding GalleryPhotoCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/buttonR.png"/>
             </Button.Background>
+            <Grid Width="{Binding ActualWidth, ElementName=Button}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="15*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="ФОТОГАЛЕРЕЯ" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Foreground="#d29d1b" 
+                       FontSize="30" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            </Grid>
         </Button>
-        <Button Content="Музей сайты" Margin="5" Grid.Row="2" Command="{Binding BukletCommand}">
+        <Button Margin="5" Grid.Row="2" Command="{Binding BukletCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/buttonR.png"/>
             </Button.Background>
+            <Grid Width="{Binding ActualWidth, ElementName=Button}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="15*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="БУКЛЕТТЕР" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Foreground="#d29d1b" 
+                       FontSize="30" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            </Grid>
         </Button>
-        <Button Content="Музей сайты" Margin="5" Grid.Row="3" Command="{Binding Model3DCommand}">
+        <Button Margin="5" Grid.Row="3" Command="{Binding Model3DCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/buttonR.png"/>
             </Button.Background>
+            <Grid Width="{Binding ActualWidth, ElementName=Button}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="15*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="3D МОДЕЛЬДЕР" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Foreground="#d29d1b" 
+                       FontSize="30" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            </Grid>
         </Button>
-        <Button Content="Музей сайты" Margin="5" Grid.Row="4" Command="{Binding CommentCommand}">
+        <Button Margin="5" Grid.Row="4" Command="{Binding CommentCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/buttonR.png"/>
             </Button.Background>
+            <Grid Width="{Binding ActualWidth, ElementName=Button}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="15*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="ПІКІР ҚАЛДЫРУ" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Foreground="#d29d1b" 
+                       FontSize="30" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            </Grid>
         </Button>
     </Grid>
 </UserControl>

@@ -24,9 +24,12 @@
             <RowDefinition Height="70*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
+        <Label Content="Шыңғырлау ауданының тарихи-өлкетану музейі" HorizontalContentAlignment="Center"
+               FontStyle="Italic" FontWeight="Black" Foreground="#363348" FontSize="42"
+               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontFamily="Calibri" Margin="0"/>
         <mah:TransitioningContentControl x:Name="LeftMenuTransition" 
                                          Content="{Binding LeftTransitionContent}" 
-                                         Grid.Column="1" Grid.Row="1" Transition="Right" />
+                                         Grid.Column="1" Grid.Row="1" Transition="Right" FontFamily="Calibri" />
         <mah:TransitioningContentControl x:Name="RightMenuTransition" 
                                          Content="{Binding RightTransitionContent}" 
                                          Grid.Column="2" Grid.Row="1" Transition="Left" />

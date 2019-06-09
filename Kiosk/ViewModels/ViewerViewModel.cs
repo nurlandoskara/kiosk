@@ -7,6 +7,7 @@ namespace Kiosk.ViewModels
     public class ViewerViewModel: BaseViewModel
     {
         private ObservableCollection<ImageItem> _items;
+        private ImageItem _selectedItem;
 
         public ObservableCollection<ImageItem> Items
         {
@@ -18,7 +19,16 @@ namespace Kiosk.ViewModels
             }
         }
 
-        public ImageItem SelectedItem { get; set; }
+        public ImageItem SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                NotifyOfPropertyChange(() => SelectedItem);
+            }
+        }
+
         public ViewerViewModel(ObservableCollection<ImageItem> items, ImageItem selectedItem)
         {
             Items = items;

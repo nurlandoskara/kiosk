@@ -14,25 +14,61 @@
             <RowDefinition Height="23*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        <Button Content="Музей сайты" Margin="5" Grid.Row="1" Command="{Binding MuseumCommand}">
+        <Button x:Name="Button" Margin="5" Grid.Row="1" Command="{Binding MuseumCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/button.png"/>
             </Button.Background>
+            <Grid Width="{Binding ActualWidth, ElementName=Button}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="КИЕЛІ ЖЕРЛЕР" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Foreground="#d29d1b" 
+                       FontSize="30" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            </Grid>
         </Button>
-        <Button Content="Музей сайты" Margin="5" Grid.Row="2" Command="{Binding VirtualCommand}">
+        <Button Margin="5" Grid.Row="2" Command="{Binding VirtualCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/button.png"/>
             </Button.Background>
+            <Grid Width="{Binding ActualWidth, ElementName=Button}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="ВИРТУАЛДЫ ТУР" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Foreground="#d29d1b" 
+                       FontSize="30" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            </Grid>
         </Button>
-        <Button Content="Музей сайты" Margin="5" Grid.Row="3" Command="{Binding Gallery3DCommand}">
+        <Button Margin="5" Grid.Row="3" Command="{Binding Gallery3DCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/button.png"/>
             </Button.Background>
+            <Grid Width="{Binding ActualWidth, ElementName=Button}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="3D-ГАЛЕРЕЯ" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Foreground="#d29d1b" 
+                       FontSize="30" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            </Grid>
         </Button>
-        <Button Content="Музей сайты" Margin="5" Grid.Row="4" Command="{Binding HistoryCommand}">
+        <Button Margin="5" Grid.Row="4" Command="{Binding HistoryCommand}">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/button.png"/>
             </Button.Background>
+            <Grid Width="{Binding ActualWidth, ElementName=Button}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="ТАРИХИ ЖАД" Grid.Column="1" FontWeight="Bold" FontFamily="Arial" Foreground="#d29d1b" 
+                       FontSize="30" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            </Grid>
         </Button>
     </Grid>
 </UserControl>
