@@ -158,7 +158,7 @@ namespace Kiosk.ViewModels
             {
                 try
                 {
-                    var image = new BitmapImage(new Uri($"{path}\\{folder}\\preview.jpg"));
+                    var image = new BitmapImage(new Uri($"{path}\\{folder}\\preview.png"));
                     var description = string.Empty;
                     var descriptionPath = $"{path}\\{folder}\\description.txt";
                     if (File.Exists(descriptionPath))

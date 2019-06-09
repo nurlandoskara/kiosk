@@ -5,21 +5,32 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <mah:FlipView x:Name="FlipView" ItemsSource="{Binding Items}"
+    <UserControl.Background>
+        <SolidColorBrush Color="Black" Opacity="0.5"/>
+    </UserControl.Background>
+    <Grid x:Name="Grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="20*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <mah:FlipView x:Name="FlipView" ItemsSource="{Binding Items}" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1"
                       IsBannerEnabled="False" SelectedItem="{Binding SelectedItem}" BannerText="{Binding SelectedItem.Description}"
-                      SelectedIndex="{Binding SelectedIndex}">
+                      SelectedIndex="{Binding SelectedIndex}" MouseDoubleClick="FlipView_OnMouseDoubleClick">
             <mah:FlipView.Background>
-                <SolidColorBrush Color="Black" Opacity="0.5"/>
+                <SolidColorBrush Color="White"/>
             </mah:FlipView.Background>
             <mah:FlipView.ItemTemplate>
                 <DataTemplate>
-                    <Grid MaxWidth="{Binding ActualWidth, ElementName=FlipView}">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80*"/>
                             <RowDefinition Height="20*"/>
                         </Grid.RowDefinitions>
-                        <Image Source="{Binding Url}" Grid.Row="0" Grid.RowSpan="2"/>
+                        <Image Source="{Binding Url}" Width="{Binding ActualWidth, ElementName=FlipView}" Grid.Row="0" Grid.RowSpan="2" Stretch="UniformToFill"/>
                         <Label Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                             <Label.Background>
                                 <SolidColorBrush Color="Black" Opacity="0.5"/>
