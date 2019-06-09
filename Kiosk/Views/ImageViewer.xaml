@@ -23,10 +23,22 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <mah:FlipView Grid.Row="1" Grid.Column="1" x:Name="FlipView" ItemsSource="{Binding Items}" MouseLeave="FlipView_OnMouseLeave"
-                      IsBannerEnabled="True" SelectedItem="{Binding SelectedItem}" BannerText="{Binding SelectedItem.Url}">
+                      IsBannerEnabled="False" SelectedItem="{Binding SelectedItem}" BannerText="{Binding SelectedItem.Description}">
             <mah:FlipView.ItemTemplate>
                 <DataTemplate>
-                    <Image Width="{Binding ActualWidth, ElementName=FlipView}" Source="{Binding Url}"/>
+                    <Grid Width="{Binding ActualWidth, ElementName=FlipView}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80*"/>
+                            <RowDefinition Height="20*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding Url}" Grid.Row="0" Grid.RowSpan="2"/>
+                        <Label Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                            <Label.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.5"/>
+                            </Label.Background>
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="White"/>
+                        </Label>
+                    </Grid>
                 </DataTemplate>
             </mah:FlipView.ItemTemplate>
         </mah:FlipView>

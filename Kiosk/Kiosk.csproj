@@ -131,6 +131,7 @@
     <Compile Include="Classes\Command.cs" />
     <Compile Include="Classes\Enums.cs" />
     <Compile Include="Classes\LoadData.cs" />
+    <Compile Include="Models\FileItem.cs" />
     <Compile Include="Models\ImageItem.cs" />
     <Compile Include="RightMenuContent.xaml.cs">
       <DependentUpon>RightMenuContent.xaml</DependentUpon>

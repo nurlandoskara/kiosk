@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows.Controls;
 using Kiosk.Classes;
 using System.Windows.Input;
@@ -147,15 +148,26 @@ namespace Kiosk.ViewModels
         private void OpenModel3D(object parameter)
         {
             Transition(false);
-            var list = LoadData.GetFolders("C:\\xampp\\htdocs\\Exponates\\");
+            const string path = "C:\\xampp\\htdocs\\Exponates";
+            var list = LoadData.GetFolders(path);
             ImagesList = new BindableCollection<ImageItem>();
             foreach (var folder in list)
             {
                 try
                 {
-                    var image = new BitmapImage(new Uri($"C:\\xampp\\htdocs\\Exponates\\{folder}\\preview.jpg"));
+                    var image = new BitmapImage(new Uri($"{path}\\{folder}\\preview.jpg"));
+                    var description = string.Empty;
+                    var descriptionPath = $"{path}\\{folder}\\description.txt";
+                    if (File.Exists(descriptionPath))
+                    {
+                        using (var sr = new StreamReader(descriptionPath))
+                        {
+                            description = sr.ReadToEnd();
+                        }
+                    }
+
                     ImagesList.Add(new ImageItem
-                        {Source = image, Url = $"http:\\\\localhost\\Exponates\\{folder}\\start.html", ItemType = ItemType.Html});
+                        {Source = image, Url = $"http:\\\\localhost\\Exponates\\{folder}\\start.html", ItemType = ItemType.Html, Description = description});
                 }
                 catch (Exception e)
                 {
@@ -172,20 +184,8 @@ namespace Kiosk.ViewModels
         private void OpenGalleryPhoto(object parameter)
         {
             Transition(false);
-            var list = LoadData.GetFiles("C:\\xampp\\htdocs\\PhotoGallery");
-            ImagesList = new BindableCollection<ImageItem>();
-            foreach (var image in list)
-            {
-                try
-                {
-                    ImagesList.Add(new ImageItem
-                        {Source = new BitmapImage(new Uri(image)), ItemType = ItemType.Image, Url = image});
-                }
-                catch (Exception e)
-                {
-                    continue;
-                }
-            }
+            const string path = "C:\\xampp\\htdocs\\PhotoGallery";
+            LoadImages(path);
             CenterTransitionContent = new Gallery();
         }
 
@@ -196,21 +196,37 @@ namespace Kiosk.ViewModels
         private void OpenGallery3D(object parameter)
         {
             Transition(false);
-            var list = LoadData.GetFiles("C:\\xampp\\htdocs\\3DGallery");
+            const string path = "C:\\xampp\\htdocs\\3DGallery";
+            LoadImages(path);
+            CenterTransitionContent = new Gallery();
+        }
+
+        private void LoadImages(string path)
+        {
+            var list = LoadData.GetFiles(path);
             ImagesList = new BindableCollection<ImageItem>();
             foreach (var image in list)
             {
                 try
                 {
+                    var description = string.Empty;
+                    var descriptionPath =
+                        $"{path}\\{image.Name.Remove(image.Name.ToLower().IndexOf(".jpg", StringComparison.Ordinal))}.txt";
+                    if (File.Exists(descriptionPath))
+                    {
+                        using (var sr = new StreamReader(descriptionPath))
+                        {
+                            description = sr.ReadToEnd();
+                        }
+                    }
                     ImagesList.Add(new ImageItem
-                        {Source = new BitmapImage(new Uri(image)), ItemType = ItemType.Image, Url = image});
+                        { Source = new BitmapImage(new Uri(image.FullPath)), ItemType = ItemType.Image, Url = image.FullPath, Description = description });
                 }
                 catch (Exception e)
                 {
                     continue;
                 }
             }
-            CenterTransitionContent = new Gallery();
         }
 
         private void OpenVirtual(object parameter)
