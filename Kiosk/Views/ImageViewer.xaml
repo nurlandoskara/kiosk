@@ -18,7 +18,7 @@
             <RowDefinition Height="70*"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
-        <mah:FlipView x:Name="FlipView" ItemsSource="{Binding Items}" Grid.Column="{Binding Column}" Grid.Row="{Binding Row}" Grid.ColumnSpan="{Binding ColumnSpan}"
+        <mah:FlipView x:Name="FlipView" ItemsSource="{Binding Items}" Grid.Column="1" Grid.Row="0" 
                       IsBannerEnabled="False" SelectedItem="{Binding SelectedItem}" BannerText="{Binding SelectedItem.Description}"
                       SelectedIndex="{Binding SelectedIndex}" >
             <mah:FlipView.Background>

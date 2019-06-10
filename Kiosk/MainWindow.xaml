@@ -59,7 +59,7 @@
                 </materialDesign:TransitioningContent>
             </materialDesign:Transitioner>
         </Grid>
-        <MediaElement Visibility="Hidden" x:Name="ScreenSaver" Source="C:\xampp\htdocs\screensaver.mp4" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" UnloadedBehavior="Manual" LoadedBehavior="Manual" OpacityMask="Black" Stretch="UniformToFill"/>
+        <MediaElement Visibility="Collapsed" x:Name="ScreenSaver" Source="C:\xampp\htdocs\screensaver.mp4" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" UnloadedBehavior="Manual" LoadedBehavior="Manual" OpacityMask="Black" Stretch="UniformToFill"/>
     </Grid>
 
 </mah:MetroWindow>
