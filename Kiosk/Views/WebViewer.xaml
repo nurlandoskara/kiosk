@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-                    <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="FlipView">
+                    <Grid Grid.Column="1" Grid.Row="0" x:Name="FlipView">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80*"/>
                             <RowDefinition Height="20*"/>

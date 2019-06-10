@@ -5,10 +5,11 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                 mc:Ignorable="d" MouseMove="MainWindow_OnMouseMove"
+                 xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                 mc:Ignorable="d" MouseDown="MainWindow_OnMouseDown" MouseMove="MainWindow_OnMouseMove"
                  Title="KIOSK" Height="450" Width="800" WindowState="Maximized" WindowStyle="None" 
                  ShowTitleBar="False" ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False"
-                 ContentRendered="MainWindow_OnContentRendered"  IgnoreTaskbarOnMaximize="True">
+                 ContentRendered="MainWindow_OnContentRendered"  IgnoreTaskbarOnMaximize="True" >
     <mah:MetroWindow.Background>
         <ImageBrush ImageSource="Resources/bg.jpg"/>
     </mah:MetroWindow.Background>
@@ -33,17 +34,32 @@
         <mah:TransitioningContentControl x:Name="RightMenuTransition" 
                                          Content="{Binding RightTransitionContent}" 
                                          Grid.Column="2" Grid.Row="1" Transition="Left" />
-
-        <materialDesign:Transitioner x:Name="CenterTransition" SelectedIndex="{Binding SelectedCenterContentIndex}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" 
-                                     MouseDoubleClick="CenterTransition_OnMouseDoubleClick"
-                                     Visibility="{Binding IsCenterContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <materialDesign:TransitioningContent Content="{Binding CenterTransitionContent}" MouseLeave="CenterTransition_OnMouseLeave">
-                <materialDesign:TransitioningContent.OpeningEffects>
-                    <materialDesign:TransitionEffect Kind="SlideInFromBottom" />
-                </materialDesign:TransitioningContent.OpeningEffects>
-            </materialDesign:TransitioningContent>
-        </materialDesign:Transitioner>
-        <MediaElement GotTouchCapture="ScreenSaver_OnGotTouchCapture" Visibility="Collapsed" x:Name="ScreenSaver" Source="C:\xampp\htdocs\screensaver.mp4" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" UnloadedBehavior="Manual" LoadedBehavior="Manual" OpacityMask="Black" Stretch="UniformToFill"/>
+        <Grid x:Name="CenterContent" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" 
+              Visibility="{Binding IsCenterContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.Background>
+                <SolidColorBrush Color="#FF110000" Opacity="0.5"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Margin="5" Click="ButtonBase_OnClick" >
+                    <iconPacks:PackIconMaterial Kind="WindowMaximize" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
+                <Button Margin="5" Command="{Binding CloseCommand}">
+                    <iconPacks:PackIconMaterial Kind="WindowClose" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
+            </StackPanel>
+            <materialDesign:Transitioner Grid.Row="1" x:Name="CenterTransition" SelectedIndex="{Binding SelectedCenterContentIndex}">
+                <materialDesign:TransitioningContent Content="{Binding CenterTransitionContent}">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromBottom" />
+                    </materialDesign:TransitioningContent.OpeningEffects>
+                </materialDesign:TransitioningContent>
+            </materialDesign:Transitioner>
+        </Grid>
+        <MediaElement Visibility="Hidden" x:Name="ScreenSaver" Source="C:\xampp\htdocs\screensaver.mp4" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" UnloadedBehavior="Manual" LoadedBehavior="Manual" OpacityMask="Black" Stretch="UniformToFill"/>
     </Grid>
 
 </mah:MetroWindow>

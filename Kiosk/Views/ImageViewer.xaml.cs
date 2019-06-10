@@ -17,10 +17,10 @@ namespace Kiosk.Views
         private int _rowSpan;
         private int _columnSpan;
 
-        public ImageViewer(ObservableCollection<ImageItem> items, ImageItem selectedItem)
+        public ImageViewer(ObservableCollection<ImageItem> items)
         {
             InitializeComponent();
-            DataContext = new ViewerViewModel(items, selectedItem);
+            DataContext = new ViewerViewModel(items);
         }
 
         private void FlipView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -12,12 +12,11 @@ namespace Kiosk
     /// </summary>
     public partial class MainWindow
     {
-        private bool _isMaximized;
+        public bool IsMaximized;
         private int _column;
         private int _row;
         private int _columnSpan;
         private int _rowSpan;
-        private MainViewModel _viewModel;
         private readonly DispatcherTimer _timer;
         private bool _screenSaver;
 
@@ -43,37 +42,9 @@ namespace Kiosk
 
         private void MainWindow_OnContentRendered(object sender, EventArgs e)
         {
-            DataContext = _viewModel = new MainViewModel();
+            DataContext =  new MainViewModel(this);
         }
-
-        private void CenterTransition_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (_isMaximized)
-            {
-                CenterTransition.SetValue(Grid.RowProperty, _column);
-                CenterTransition.SetValue(Grid.ColumnProperty, _row);
-                CenterTransition.SetValue(Grid.ColumnSpanProperty, _columnSpan);
-                CenterTransition.SetValue(Grid.RowSpanProperty, _rowSpan);
-            }
-            else
-            {
-                _column = (int) CenterTransition.GetValue(Grid.ColumnProperty);
-                _row = (int)CenterTransition.GetValue(Grid.RowProperty);
-                _rowSpan = (int)CenterTransition.GetValue(Grid.RowSpanProperty);
-                _columnSpan = (int)CenterTransition.GetValue(Grid.ColumnSpanProperty);
-                CenterTransition.SetValue(Grid.RowProperty, 0);
-                CenterTransition.SetValue(Grid.ColumnProperty, 0);
-                CenterTransition.SetValue(Grid.ColumnSpanProperty, Grid.ColumnDefinitions.Count);
-                CenterTransition.SetValue(Grid.RowSpanProperty, Grid.RowDefinitions.Count);
-            }
-            _isMaximized = !_isMaximized;
-        }
-
-        private void CenterTransition_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            _viewModel.Transition(true);
-        }
-
+        
         private void MainWindow_OnMouseMove(object sender, MouseEventArgs e)
         {
             if (!_screenSaver)
@@ -82,8 +53,8 @@ namespace Kiosk
                 _timer.Start();
             }
         }
-
-        private void ScreenSaver_OnGotTouchCapture(object sender, TouchEventArgs e)
+        
+        private void MainWindow_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (_screenSaver)
             {
@@ -92,6 +63,29 @@ namespace Kiosk
                 _screenSaver = false;
                 _timer.Start();
             }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (IsMaximized)
+            {
+                CenterContent.SetValue(Grid.RowProperty, _column);
+                CenterContent.SetValue(Grid.ColumnProperty, _row);
+                CenterContent.SetValue(Grid.ColumnSpanProperty, _columnSpan);
+                CenterContent.SetValue(Grid.RowSpanProperty, _rowSpan);
+            }
+            else
+            {
+                _column = (int)CenterTransition.GetValue(Grid.ColumnProperty);
+                _row = (int)CenterTransition.GetValue(Grid.RowProperty);
+                _rowSpan = (int)CenterTransition.GetValue(Grid.RowSpanProperty);
+                _columnSpan = (int)CenterTransition.GetValue(Grid.ColumnSpanProperty);
+                CenterContent.SetValue(Grid.RowProperty, 0);
+                CenterContent.SetValue(Grid.ColumnProperty, 0);
+                CenterContent.SetValue(Grid.ColumnSpanProperty, Grid.ColumnDefinitions.Count);
+                CenterContent.SetValue(Grid.RowSpanProperty, Grid.RowDefinitions.Count);
+            }
+            IsMaximized = !IsMaximized;
         }
     }
 }

@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using Kiosk.Classes;
+using Kiosk.Models;
+using Kiosk.Views;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Controls;
-using Kiosk.Classes;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using Caliburn.Micro;
-using Kiosk.Models;
-using Kiosk.Views;
-using MahApps.Metro.Controls;
 
 namespace Kiosk.ViewModels
 {
@@ -20,6 +19,7 @@ namespace Kiosk.ViewModels
         private UserControl _centerTransitionContent;
         private int _selectedCenterContentIndex;
         private ImageItem _selectedImage;
+        private MainWindow _mainWindow;
 
         public UserControl LeftTransitionContent
         {
@@ -59,6 +59,7 @@ namespace Kiosk.ViewModels
         public ICommand BukletCommand { get; set; }
         public ICommand Model3DCommand { get; set; }
         public ICommand CommentCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
 
         public bool IsCenterContentVisible
         {
@@ -95,8 +96,9 @@ namespace Kiosk.ViewModels
             }
         }
 
-        public MainViewModel()
+        public MainViewModel(MainWindow mainWindow)
         {
+            _mainWindow = mainWindow;
             MuseumCommand = new Command(OpenMuseum, CanExecuteCommand);
             VirtualCommand = new Command(OpenVirtual, CanExecuteCommand);
             Gallery3DCommand = new Command(OpenGallery3D, CanExecuteCommand);
@@ -105,19 +107,19 @@ namespace Kiosk.ViewModels
             BukletCommand = new Command(OpenBuklet, CanExecuteCommand);
             Model3DCommand = new Command(OpenModel3D, CanExecuteCommand);
             CommentCommand = new Command(OpenComment, CanExecuteCommand);
+            CloseCommand = new Command(Close, CanExecuteCommand);
             Transition(true);
         }
 
+        private void Close(object parameter)
+        {
+            Transition(true);
+        }
         private void OpenViewer()
         {
             if (SelectedImage != null)
             {
-                if (SelectedImage.ItemType == ItemType.Image)
-                {
-                    var viewer = new ImageViewer(ImagesList, SelectedImage);
-                    CenterTransitionContent.Content = viewer;
-                }
-                else
+                if (SelectedImage.ItemType == ItemType.Html)
                 {
                     var viewer = new WebViewer(SelectedImage);
                     CenterTransitionContent.Content = viewer;
@@ -132,6 +134,7 @@ namespace Kiosk.ViewModels
                 RightTransitionContent = new RightMenuContent();
                 CenterTransitionContent = null;
                 IsCenterContentVisible = false;
+                _mainWindow.IsMaximized = false;
             }
             else
             {
@@ -189,7 +192,7 @@ namespace Kiosk.ViewModels
             Transition(false);
             const string path = "C:\\xampp\\htdocs\\PhotoGallery";
             LoadImages(path);
-            CenterTransitionContent = new Gallery();
+            CenterTransitionContent = new ImageViewer(ImagesList);
         }
 
         private void OpenHistory(object parameter)
@@ -201,7 +204,7 @@ namespace Kiosk.ViewModels
             Transition(false);
             const string path = "C:\\xampp\\htdocs\\3DGallery";
             LoadImages(path);
-            CenterTransitionContent = new Gallery();
+            CenterTransitionContent = new ImageViewer(ImagesList);
         }
 
         private void LoadImages(string path)

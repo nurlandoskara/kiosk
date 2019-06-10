@@ -44,10 +44,10 @@ namespace Kiosk.ViewModels
         }
 
 
-        public ViewerViewModel(ObservableCollection<ImageItem> items, ImageItem selectedItem)
+        public ViewerViewModel(ObservableCollection<ImageItem> items)
         {
             Items = items;
-            SelectedItem = Items.FirstOrDefault(x => x.Url == selectedItem.Url);
+            SelectedItem = Items.FirstOrDefault();
         }
     }
 }

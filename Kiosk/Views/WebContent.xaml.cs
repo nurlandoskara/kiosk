@@ -13,10 +13,5 @@ namespace Kiosk.Views
             InitializeComponent();
             WebBrowser.Address = url;
         }
-
-        private void WebBrowser_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
     }
 }
