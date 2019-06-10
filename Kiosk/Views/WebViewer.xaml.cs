@@ -17,10 +17,11 @@ namespace Kiosk.Views
         private int _rowSpan;
         private int _columnSpan;
 
-        public WebViewer(ObservableCollection<ImageItem> items, ImageItem selectedItem)
+        public WebViewer(ImageItem selectedItem)
         {
             InitializeComponent();
-            DataContext = new ViewerViewModel(items, selectedItem);
+            WebBrowser.Address = selectedItem.Url;
+            Description.Text = selectedItem.Description;
         }
 
         private void FlipView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)

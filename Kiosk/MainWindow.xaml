@@ -8,7 +8,7 @@
                  mc:Ignorable="d" MouseMove="MainWindow_OnMouseMove"
                  Title="KIOSK" Height="450" Width="800" WindowState="Maximized" WindowStyle="None" 
                  ShowTitleBar="False" ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False"
-                 ContentRendered="MainWindow_OnContentRendered">
+                 ContentRendered="MainWindow_OnContentRendered"  IgnoreTaskbarOnMaximize="True">
     <mah:MetroWindow.Background>
         <ImageBrush ImageSource="Resources/bg.jpg"/>
     </mah:MetroWindow.Background>
