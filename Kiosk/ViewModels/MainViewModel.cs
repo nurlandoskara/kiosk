@@ -20,6 +20,10 @@ namespace Kiosk.ViewModels
         private int _selectedCenterContentIndex;
         private ImageItem _selectedImage;
         private MainWindow _mainWindow;
+        private bool _isGallery;
+        private int _column;
+        private int _row;
+        private int _columnSpan;
 
         public UserControl LeftTransitionContent
         {
@@ -96,9 +100,42 @@ namespace Kiosk.ViewModels
             }
         }
 
+        public int Column
+        {
+            get => _column;
+            set
+            {
+                _column = value;
+                NotifyOfPropertyChange(() => Column);
+            }
+        }
+
+        public int Row
+        {
+            get => _row;
+            set
+            {
+                _row = value;
+                NotifyOfPropertyChange(() => Row);
+            }
+        }
+
+        public int ColumnSpan
+        {
+            get => _columnSpan;
+            set
+            {
+                _columnSpan = value;
+                NotifyOfPropertyChange(() => ColumnSpan);
+            }
+        }
+
         public MainViewModel(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
+            Row = 0;
+            Column = 1;
+            ColumnSpan = 1;
             MuseumCommand = new Command(OpenMuseum, CanExecuteCommand);
             VirtualCommand = new Command(OpenVirtual, CanExecuteCommand);
             Gallery3DCommand = new Command(OpenGallery3D, CanExecuteCommand);
@@ -113,7 +150,15 @@ namespace Kiosk.ViewModels
 
         private void Close(object parameter)
         {
-            Transition(true);
+            if (_isGallery)
+            { 
+                _isGallery = false;
+                OpenGallery();
+            }
+            else
+            {
+                Transition(true);
+            }
         }
         private void OpenViewer()
         {
@@ -124,6 +169,8 @@ namespace Kiosk.ViewModels
                     var viewer = new WebViewer(SelectedImage);
                     CenterTransitionContent.Content = viewer;
                 }
+
+                _isGallery = true;
             }
         }
         public void Transition(bool isAppear)
@@ -134,7 +181,6 @@ namespace Kiosk.ViewModels
                 RightTransitionContent = new RightMenuContent();
                 CenterTransitionContent = null;
                 IsCenterContentVisible = false;
-                _mainWindow.IsMaximized = false;
             }
             else
             {
@@ -151,7 +197,7 @@ namespace Kiosk.ViewModels
             CenterTransitionContent = view;
         }
 
-        private void OpenModel3D(object parameter)
+        private void OpenGallery()
         {
             Transition(false);
             const string path = "C:\\xampp\\htdocs\\Exponates";
@@ -173,14 +219,19 @@ namespace Kiosk.ViewModels
                     }
 
                     ImagesList.Add(new ImageItem
-                        {Source = image, Url = $"http:\\\\localhost\\Exponates\\{folder}\\start.html", ItemType = ItemType.Html, Description = description});
+                        { Source = image, Url = $"http:\\\\localhost\\Exponates\\{folder}\\start.html", ItemType = ItemType.Html, Description = description });
                 }
                 catch (Exception e)
                 {
                     continue;
                 }
             }
+
             CenterTransitionContent = new Gallery();
+        }
+        private void OpenModel3D(object parameter)
+        {
+            OpenGallery();
         }
 
         private void OpenBuklet(object parameter)

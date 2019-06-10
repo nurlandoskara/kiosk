@@ -47,7 +47,7 @@
                 <Button Margin="5" Click="ButtonBase_OnClick" >
                     <iconPacks:PackIconMaterial Kind="WindowMaximize" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
-                <Button Margin="5" Command="{Binding CloseCommand}">
+                <Button Margin="5" Command="{Binding CloseCommand}" Click="ButtonBase1_OnClick">
                     <iconPacks:PackIconMaterial Kind="WindowClose" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
             </StackPanel>

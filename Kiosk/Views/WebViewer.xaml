@@ -6,28 +6,18 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
                  mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="Grid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*"/>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="20*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-                    <Grid Grid.Column="1" Grid.Row="0" x:Name="FlipView">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="80*"/>
-                            <RowDefinition Height="20*"/>
-                        </Grid.RowDefinitions>
-                        <wpf:ChromiumWebBrowser Grid.Row="0" Grid.RowSpan="2" x:Name="WebBrowser" 
+    <Grid x:Name="FlipView">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <wpf:ChromiumWebBrowser Grid.Row="0" Grid.RowSpan="2" x:Name="WebBrowser" 
                                                 Width="{Binding ActualWidth, ElementName=FlipView}" />
-                        <Label Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                            <Label.Background>
-                                <SolidColorBrush Color="Black" Opacity="0.5"/>
-                            </Label.Background>
-                            <TextBlock Text="" x:Name="Description" TextWrapping="Wrap" Foreground="White"/>
-                        </Label>
-                    </Grid>
-    </Grid>
+            <Label Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.5"/>
+                </Label.Background>
+                <TextBlock Text="" x:Name="Description" TextWrapping="Wrap" Foreground="White"/>
+            </Label>
+        </Grid>
 </UserControl>

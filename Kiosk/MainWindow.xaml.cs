@@ -19,6 +19,7 @@ namespace Kiosk
         private int _rowSpan;
         private readonly DispatcherTimer _timer;
         private bool _screenSaver;
+        private MainViewModel _viewModel;
 
         public MainWindow()
         {
@@ -42,7 +43,7 @@ namespace Kiosk
 
         private void MainWindow_OnContentRendered(object sender, EventArgs e)
         {
-            DataContext =  new MainViewModel(this);
+            DataContext = _viewModel = new MainViewModel(this);
         }
         
         private void MainWindow_OnMouseMove(object sender, MouseEventArgs e)
@@ -67,25 +68,42 @@ namespace Kiosk
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+            Maximize();
+        }
+
+        private void Maximize()
+        {
             if (IsMaximized)
             {
                 CenterContent.SetValue(Grid.RowProperty, _column);
                 CenterContent.SetValue(Grid.ColumnProperty, _row);
                 CenterContent.SetValue(Grid.ColumnSpanProperty, _columnSpan);
                 CenterContent.SetValue(Grid.RowSpanProperty, _rowSpan);
+                _viewModel.Row = 0;
+                _viewModel.Column = 1;
+                _viewModel.ColumnSpan = 3;
+                IsMaximized = false;
             }
             else
             {
-                _column = (int)CenterTransition.GetValue(Grid.ColumnProperty);
-                _row = (int)CenterTransition.GetValue(Grid.RowProperty);
-                _rowSpan = (int)CenterTransition.GetValue(Grid.RowSpanProperty);
-                _columnSpan = (int)CenterTransition.GetValue(Grid.ColumnSpanProperty);
+                _viewModel.Row = 0;
+                _viewModel.Column = 0;
+                _viewModel.ColumnSpan = 3;
+                _column = (int)CenterContent.GetValue(Grid.ColumnProperty);
+                _row = (int)CenterContent.GetValue(Grid.RowProperty);
+                _rowSpan = (int)CenterContent.GetValue(Grid.RowSpanProperty);
+                _columnSpan = (int)CenterContent.GetValue(Grid.ColumnSpanProperty);
                 CenterContent.SetValue(Grid.RowProperty, 0);
                 CenterContent.SetValue(Grid.ColumnProperty, 0);
                 CenterContent.SetValue(Grid.ColumnSpanProperty, Grid.ColumnDefinitions.Count);
                 CenterContent.SetValue(Grid.RowSpanProperty, Grid.RowDefinitions.Count);
+                IsMaximized = true;
             }
-            IsMaximized = !IsMaximized;
+        }
+
+        private void ButtonBase1_OnClick(object sender, RoutedEventArgs e)
+        {
+            Maximize();
         }
     }
 }
