@@ -50,7 +50,7 @@ namespace Kiosk.ViewModels
             SelectedItem = Items.FirstOrDefault(x => x.Url == selectedItem.Url);
             var timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;
-            timer.Interval = new TimeSpan(0, 0, 5);
+            timer.Interval = new TimeSpan(0, 0, 30);
             timer.Start();
         }
 
