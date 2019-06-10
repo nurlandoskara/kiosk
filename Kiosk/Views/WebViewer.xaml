@@ -15,12 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <mah:FlipView x:Name="FlipView" ItemsSource="{Binding Items}" IsBannerEnabled="False" SelectedItem="{Binding SelectedItem}"
-                      Grid.ColumnSpan="1" Grid.RowSpan="1"
-                      SelectedIndex="{Binding SelectedIndex}" Grid.Column="1" Grid.Row="0" MouseDoubleClick="FlipView_OnMouseDoubleClick" Background="Black">
-            <mah:FlipView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
+                    <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80*"/>
                             <RowDefinition Height="20*"/>
@@ -34,8 +29,5 @@
                             <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="White"/>
                         </Label>
                     </Grid>
-                </DataTemplate>
-            </mah:FlipView.ItemTemplate>
-        </mah:FlipView>
     </Grid>
 </UserControl>
