@@ -15,8 +15,8 @@
             <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
         <mah:FlipView x:Name="FlipView" ItemsSource="{Binding Items}" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1"
                       IsBannerEnabled="False" SelectedItem="{Binding SelectedItem}" BannerText="{Binding SelectedItem.Description}"
@@ -42,46 +42,26 @@
                 </DataTemplate>
             </mah:FlipView.ItemTemplate>
         </mah:FlipView>
-      <ListBox x:Name="GalleryList" HorizontalContentAlignment="Center" SelectionMode="Single" SelectedItem="{Binding SelectedItem}"
-
-                 ItemsSource="{Binding Items}" Background="{x:Null}" BorderBrush="{x:Null}" >
-
+      <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="GalleryList" HorizontalContentAlignment="Center" SelectionMode="Single" SelectedItem="{Binding SelectedItem}"
+                 ItemsSource="{Binding Items}" Background="{x:Null}" BorderBrush="{x:Null}">
             <ListBox.Resources>
-
                 <Style TargetType="ListBoxItem">
-
                     <Setter Property="Background" Value="Transparent" />
-
                 </Style>
-
             </ListBox.Resources>
-
             <ListBox.ItemsPanel>
-
                 <ItemsPanelTemplate>
-
                     <WrapPanel x:Name="WrapPanel" HorizontalAlignment="Center" Orientation="Horizontal" 
-
                                MaxHeight="{Binding ActualHeight, ElementName=GalleryList}"/>
-
                 </ItemsPanelTemplate>
-
             </ListBox.ItemsPanel>
-
             <ListBox.ItemTemplate>
-
                 <DataTemplate>
-
-                    <Border Margin="10" Padding="10" Background="White">
-
+                    <Border Margin="10" Padding="10" Background="White" MaxHeight="{Binding ActualHeight, ElementName=GalleryList}">
                         <Image Width="200" Source="{Binding Source}" Stretch="Uniform" />
-
                     </Border>
-
                 </DataTemplate>
-
             </ListBox.ItemTemplate>
-
             </ListBox>
     </Grid>
 </UserControl>

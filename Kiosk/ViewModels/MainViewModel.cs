@@ -119,7 +119,7 @@ namespace Kiosk.ViewModels
                 }
                 else
                 {
-                    var viewer = new WebViewer(ImagesList, SelectedImage);
+                    var viewer = new WebViewer(SelectedImage);
                     CenterTransitionContent.Content = viewer;
                 }
             }
